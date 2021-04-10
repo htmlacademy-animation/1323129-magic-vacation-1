@@ -17,6 +17,7 @@
   height: 4rem;
   color: $c-dark;
   border-radius: 50%;
+  transition: color .15s linear;
 
   @media (max-width: $tablet) and (orientation: portrait) {
     display: none;
@@ -35,6 +36,8 @@
     background-color: $c-light;
     border: 2px solid $c-light;
     z-index: -1;
+    transition: .15s linear;
+    transition-property: width, height;
   }
 
   svg {
@@ -168,6 +171,9 @@
   color: $c-light;
   border: 2px solid transparent;
   border-radius: 50%;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: color .15s linear;
 
   @media (min-width: $stop-scaling) {
     width: 40px;
@@ -182,6 +188,14 @@
   @media (max-width: $mobile) and (orientation: landscape) {
     color: $c-light;
     background-color: $c-dark;
+  }
+
+  .social-block:hover & {
+    opacity: 1;
+    transform: translateY(0);
+    transition-property: opacity, transform, color, background-color, border-color;
+    transition-duration: .4s, .4s, .12s, .12s, .12s;
+    transition-timing-function: linear, ease-out, linear;
   }
 
   &:hover {
@@ -219,6 +233,7 @@
   }
 
   &--insta {
+    transition-delay: .15s, 0s, 0s, 0s, 0s;
     svg {
       width: 1.5rem;
       height: 1.5rem;
@@ -231,6 +246,7 @@
   }
 
   &--vk {
+    transition-delay: .3s, 0s;
     svg {
       width: 1.7rem;
       height: 1rem;
