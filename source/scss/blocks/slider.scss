@@ -69,37 +69,15 @@
   opacity: 0;
   transform: translateX(64px);
   transition:
-    opacity .7s linear .3s,
+    opacity .5s linear,
     transform 1s cubic-bezier(.08,.82,.17,1);
+  transition-delay: 0s;
 
-  animation:
-    FadeIn .7s linear,
-    RightToLeft 1s cubic-bezier(.08,.82,.17,1);
-
-  @keyframes FadeIn {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes RightToLeft {
-    0% {
-      transform: translateX(64px);
-    }
-
-    100% {
-      transform: none;
-    }
-  }
-
-  .swiper-slide-active &,
-  .swiper-slide-next & {
+  .screen.active .swiper-slide-active &,
+  .screen.active .swiper-slide-next & {
     transform: none;
     opacity: 1;
+    transition-delay: .3s;
   }
 }
 
