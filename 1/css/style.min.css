@@ -1320,7 +1320,6 @@ img {
   margin-right: 3rem;
   padding: 0 5.6rem;
   height: 6rem;
-  width: calc(100% - 21rem);
   text-transform: uppercase;
   font: inherit;
   font-size: 2.4rem;
@@ -1330,13 +1329,10 @@ img {
   border-radius: 3rem;
   outline: none;
   margin-left: auto;
-  animation: GrowWidth 1s ease-in-out; }
-
-@keyframes GrowWidth {
-  0% {
-    width: 0; }
-  100% {
-    width: calc(100% - 21rem); } }
+  width: 0;
+  transition: width .4s ease-in-out; }
+  .screen.active .form__field {
+    width: calc(100% - 21rem); }
   .form__field:focus {
     border: 1px solid #a67ee5; }
   @media (min-width: 2000px) {
@@ -1602,15 +1598,12 @@ img {
   text-transform: uppercase;
   font-size: 2.4rem;
   line-height: 1.27;
-  animation: FadeIn_BottomToTop 2s cubic-bezier(0.08, 0.82, 0.17, 1); }
-
-@keyframes FadeIn_BottomToTop {
-  0% {
-    opacity: 0;
-    transform: translateY(32px); }
-  100% {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.5s linear, transform 0.5s cubic-bezier(0.08, 0.82, 0.17, 1); }
+  .screen.active .intro__message {
     opacity: 1;
-    transform: translateY(0); } }
+    transform: none; }
   @media (min-width: 2000px) {
     .intro__message {
       width: 509px;
@@ -2948,24 +2941,13 @@ img {
 .slider__item-text {
   opacity: 0;
   transform: translateX(64px);
-  transition: opacity 0.7s linear 0.3s, transform 1s cubic-bezier(0.08, 0.82, 0.17, 1);
-  animation: FadeIn 0.7s linear, RightToLeft 1s cubic-bezier(0.08, 0.82, 0.17, 1); }
-
-@keyframes FadeIn {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-@keyframes RightToLeft {
-  0% {
-    transform: translateX(64px); }
-  100% {
-    transform: none; } }
-  .swiper-slide-active .slider__item-text,
-  .swiper-slide-next .slider__item-text {
+  transition: opacity 0.5s linear, transform 1s cubic-bezier(0.08, 0.82, 0.17, 1);
+  transition-delay: 0s; }
+  .screen.active .swiper-slide-active .slider__item-text,
+  .screen.active .swiper-slide-next .slider__item-text {
     transform: none;
-    opacity: 1; }
+    opacity: 1;
+    transition-delay: .3s; }
 
 .slider__item-title {
   margin: 0 0 0 -5.5rem;
