@@ -44,11 +44,11 @@
   border-radius: 3rem;
   outline: none;
   margin-left: auto;
-  width: 0;
+  width: calc(100% - 21rem);
   transition: width .4s ease-in-out;
 
-  .screen.active & {
-    width: calc(100% - 21rem);
+  .screen:not(.active) & {
+    width: 0;
   }
 
 
