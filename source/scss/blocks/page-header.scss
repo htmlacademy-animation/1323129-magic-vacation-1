@@ -27,6 +27,13 @@
 }
 
 .page-header__logo {
+  transform: translateX(-180px);
+  transition: transform 1s $ease-out-cubic;
+
+  .body.body--loaded & {
+    transform: none;
+  }
+
   @include hover;
   position: relative;
   flex: none;
@@ -177,6 +184,13 @@
   font-size: 1.2rem;
   line-height: 1.0418;
   color: $c-light;
+
+  transform: translateY(-70px);
+  transition: transform .85s $ease-out-cubic;
+
+  .body.body--loaded & {
+    transform: none;
+  }
 
   @media (min-width: $stop-scaling) {
     font-size: 12px;
