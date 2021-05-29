@@ -1,5 +1,9 @@
 import throttle from 'lodash/throttle';
 
+const sleep = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 2000;
@@ -39,7 +43,17 @@ export default class FullPageScroll {
     this.emitChangeDisplayEvent();
   }
 
-  changeVisibilityDisplay() {
+  async changeVisibilityDisplay() {
+    const prizesAnimationScreen = document.getElementById(`prizes-animation-screen`);
+    const currentScreenName = this.screenElements[this.activeScreen].id;
+
+    prizesAnimationScreen.classList.remove(`active`);
+
+    if (currentScreenName === `prizes`) {
+      prizesAnimationScreen.classList.add(`active`);
+      await sleep(250);
+    }
+
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
