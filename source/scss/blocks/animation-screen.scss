@@ -33,6 +33,6 @@
 
   &.active {
     top: 0;
-    transition: top .25s ease-out;
+    transition: top .6s $ease-out-cubic;
   }
 }

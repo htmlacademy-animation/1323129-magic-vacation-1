@@ -309,13 +309,7 @@
 
 .screen--prizes {
   background-color: $c-dark;
-  opacity: 0;
   z-index: $index-prizes-screen;
-
-  &.active {
-    opacity: 1;
-    transition: opacity .6s;
-  }
 }
 
 .screen--game {

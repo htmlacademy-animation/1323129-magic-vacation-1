@@ -185,11 +185,11 @@
   line-height: 1.0418;
   color: $c-light;
 
-  transform: translateY(-70px);
-  transition: transform .85s $ease-out-cubic;
+  opacity: 0;
 
   .body.body--loaded & {
-    transform: none;
+    transition: opacity 1s linear;
+    opacity: 1;
   }
 
   @media (min-width: $stop-scaling) {
@@ -259,6 +259,7 @@
 
     &::after {
       content: "";
+      display: block;
       position: absolute;
       bottom: 0;
       width: 0;
@@ -283,7 +284,10 @@
 
     &.active {
       &::after {
-        display: block;
+        transition-duration:  0.7s, 0.2s;
+        width: 100%;
+        left: 0;
+        right: auto;
       }
     }
 
@@ -293,10 +297,10 @@
       outline: none;
 
       &::after {
-        display: block;
         opacity: 1;
         width: 100%;
         left: 0;
+        right: auto;
         background-color: $c-purple;
       }
     }
