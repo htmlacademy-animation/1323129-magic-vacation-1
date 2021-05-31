@@ -1007,7 +1007,7 @@ img {
   z-index: 2; }
   .prizes-animation-screen.active {
     top: 0;
-    transition: top .25s ease-out; }
+    transition: top 0.6s cubic-bezier(0.33, 1, 0.68, 1); }
 
 .btn {
   padding: 0;
@@ -1836,10 +1836,10 @@ img {
   font-size: 1.2rem;
   line-height: 1.0418;
   color: #ffffff;
-  transform: translateY(-70px);
-  transition: transform 0.85s cubic-bezier(0.33, 1, 0.68, 1); }
+  opacity: 0; }
   .body.body--loaded .page-header__menu {
-    transform: none; }
+    transition: opacity 1s linear;
+    opacity: 1; }
   @media (min-width: 2000px) {
     .page-header__menu {
       font-size: 12px; } }
@@ -1892,6 +1892,7 @@ img {
     transition: color .2s linear; }
     .page-header__menu a::after {
       content: "";
+      display: block;
       position: absolute;
       bottom: 0;
       width: 0;
@@ -1911,15 +1912,18 @@ img {
           right: 0;
           background-color: #5f458c; } }
     .page-header__menu a.active::after {
-      display: block; }
+      transition-duration: 0.7s, 0.2s;
+      width: 100%;
+      left: 0;
+      right: auto; }
     .page-header__menu a:hover, .page-header__menu a:focus {
       color: #a67ee5;
       outline: none; }
       .page-header__menu a:hover::after, .page-header__menu a:focus::after {
-        display: block;
         opacity: 1;
         width: 100%;
         left: 0;
+        right: auto;
         background-color: #a67ee5; }
 
 .page-header__social {
@@ -2873,11 +2877,7 @@ img {
 
 .screen--prizes {
   background-color: #5f458c;
-  opacity: 0;
   z-index: 3; }
-  .screen--prizes.active {
-    opacity: 1;
-    transition: opacity .6s; }
 
 .screen--game {
   position: relative;
