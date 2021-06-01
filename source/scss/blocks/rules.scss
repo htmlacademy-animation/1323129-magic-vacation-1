@@ -226,10 +226,13 @@
   bottom: 6rem;
   right: 5.6rem;
   max-width: 18rem;
+  will-change: contents;
 
   animation-name: rules-link-move, rules-link-fade;
   animation-duration: 1s, .2s;
+  animation-delay: .8s, .8s;
   animation-timing-function: ease, linear;
+  animation-fill-mode: backwards;
 
   @keyframes rules-link-move {
     from {
