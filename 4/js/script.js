@@ -10309,7 +10309,6 @@ class FullPageScroll {
 
     this.previousScreen = -1;
     this.activeScreen = 0;
-    this.animationScreenExecuted = false;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
   }
@@ -10364,14 +10363,9 @@ class FullPageScroll {
 
     prizesAnimationScreen.classList.remove(`active`);
 
-    if (
-      !this.animationScreenExecuted
-      && previousScreenName === `story`
-      && currentScreenName === `prizes`
-    ) {
+    if (previousScreenName === `story` && currentScreenName === `prizes`) {
       prizesAnimationScreen.classList.add(`active`);
       await sleep(600);
-      this.animationScreenExecuted = true;
     }
   }
 
