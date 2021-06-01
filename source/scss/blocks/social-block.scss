@@ -54,7 +54,7 @@
 
   &:hover,
   .social-block--active & {
-    transition: width .15s linear, height.15s linear;
+    transition: width .15s linear, height .15s linear;
     color: $c-purple;
 
     &::before {
