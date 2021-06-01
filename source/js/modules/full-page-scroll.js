@@ -1,5 +1,9 @@
 import throttle from 'lodash/throttle';
 
+const sleep = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 2000;
@@ -7,6 +11,7 @@ export default class FullPageScroll {
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
 
+    this.previousScreen = -1;
     this.activeScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
@@ -23,11 +28,13 @@ export default class FullPageScroll {
     const currentPosition = this.activeScreen;
     this.reCalculateActiveScreenPosition(evt.deltaY);
     if (currentPosition !== this.activeScreen) {
+      this.previousScreen = currentPosition;
       this.changePageDisplay();
     }
   }
 
   onUrlHashChanged() {
+    this.previousScreen = this.activeScreen;
     const newIndex = Array.from(this.screenElements).findIndex((screen) => location.hash.slice(1) === screen.id);
     this.activeScreen = (newIndex < 0) ? 0 : newIndex;
     this.changePageDisplay();
@@ -39,22 +46,40 @@ export default class FullPageScroll {
     this.emitChangeDisplayEvent();
   }
 
-  changeVisibilityDisplay() {
+  async changeVisibilityDisplay() {
+    await this.handlePrizesAnimation();
+
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
     });
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       this.screenElements[this.activeScreen].classList.add(`active`);
-    }, 100);
+    });
+  }
+
+  async handlePrizesAnimation() {
+    const prizesAnimationScreen = document.getElementById(`prizes-animation-screen`);
+    const previousScreen = this.screenElements[this.previousScreen];
+    const previousScreenName = previousScreen && previousScreen.id;
+    const currentScreenName = this.screenElements[this.activeScreen].id;
+
+    prizesAnimationScreen.classList.remove(`active`);
+
+    if (previousScreenName === `story` && currentScreenName === `prizes`) {
+      prizesAnimationScreen.classList.add(`active`);
+      await sleep(600);
+    }
   }
 
   changeActiveMenuItem() {
     const activeItem = Array.from(this.menuElements).find((item) => item.dataset.href === this.screenElements[this.activeScreen].id);
     if (activeItem) {
       this.menuElements.forEach((item) => item.classList.remove(`active`));
-      activeItem.classList.add(`active`);
+      requestAnimationFrame(() => {
+        activeItem.classList.add(`active`);
+      });
     }
   }
 
